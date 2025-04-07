@@ -1,7 +1,7 @@
 **Enable S3 Replication Across Different AWS Accounts**
-<AccountA>
+<details>
    
-**Account A:**  
+<summary> **Account A:** </summary> 
 
 - Region: us-east-1 
 
@@ -11,7 +11,7 @@
 
 - COPY the IAM role ARN number
 
-</AccountA>
+</details>
 
 **Account B:**  
 
