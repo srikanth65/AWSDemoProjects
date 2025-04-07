@@ -1,5 +1,6 @@
 **Enable S3 Replication Across Different AWS Accounts**
-
+<details>
+   
 **Account A:**  
 
 - Region: us-east-1 
@@ -8,7 +9,9 @@
 
 - Go to S3Bucket – Replication Rules – Create a rule: Give replication rule name - Select the source bucket details and rule scope - Destination: Specify a bucket in another account, account ID, Bucket name - Create a new role and SAVE 
 
-- COPY the IAM role ARN number  
+- COPY the IAM role ARN number
+
+</details>
 
 **Account B:**  
 
