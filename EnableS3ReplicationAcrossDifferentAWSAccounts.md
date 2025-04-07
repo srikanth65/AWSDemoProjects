@@ -1,7 +1,7 @@
 **Enable S3 Replication Across Different AWS Accounts**
 <details>
    
-<summary> **Account A:** </summary> 
+<summary> Account A </summary> 
 
 - Region: us-east-1 
 
