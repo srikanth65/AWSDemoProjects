@@ -1,5 +1,5 @@
 **Enable S3 Replication Across Different AWS Accounts**
-<Account A>
+<AccountA>
    
 **Account A:**  
 
@@ -11,7 +11,7 @@
 
 - COPY the IAM role ARN number
 
-</Account A>
+</AccountA>
 
 **Account B:**  
 
