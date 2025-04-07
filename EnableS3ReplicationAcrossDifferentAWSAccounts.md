@@ -2,39 +2,25 @@
 
 **Account A:**  
 
-Region: us-east-1 
+- Region: us-east-1 
 
-S3 Bucket name: create a bucket with name:  account-a-us-east-1 
+- S3 Bucket name: create a bucket with name:  account-a-us-east-1 and Enable bucket versioning  
 
-Enable bucket versioning  
+- Go to S3Bucket – Replication Rules – Create a rule: Give replication rule name - Select the source bucket details and rule scope - Destination: Specify a bucket in another account, account ID, Bucket name - Create a new role and SAVE 
 
-S3Bucket – Replication Rules – Create a rule: 
-
-Give replication rule name 
-
-Select the source bucket details and rule scope  
-
-Destination: Specify a bucket in another account, account ID, Bucket name,  
-
-Create a new role and SAVE 
-
-COPY the IAM role ARN number  
+- COPY the IAM role ARN number  
 
 **Account B:**  
 
-S3 Bucket name: Create a bucket with name account-b-us-west-1 
+- S3 Bucket name: Create a bucket with name account-b-us-west-1 and Enable bucket versioning 
 
-Enable bucket versioning 
+S3 Bucket – Permissions – Bucket Policy – edit - Use this policy: https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-walkthrough-2.html 
 
-S3 Bucket – Permissions – Bucket Policy – edit  
+- Replace with IAM role ARN number from Account A  
 
-Use this policy: https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-walkthrough-2.html 
+- Replace resource with Account B bucket ARN – account-b-us-west-1  
 
-Replace with IAM role ARN number from Account A  
-
-Replace resource with Account B bucket ARN – account-b-us-west-1  
-
-Bucket Policy:  
+**Bucket Policy:**  
 
 { 
 
