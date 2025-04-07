@@ -1,6 +1,6 @@
-Enable S3 Replication Across Different AWS Accounts 
+**Enable S3 Replication Across Different AWS Accounts**
 
-Account A:  
+**Account A:**  
 
 Region: us-east-1 
 
@@ -20,7 +20,7 @@ Create a new role and SAVE
 
 COPY the IAM role ARN number  
 
-Account B:  
+**Account B:**  
 
 S3 Bucket name: Create a bucket with name account-b-us-west-1 
 
