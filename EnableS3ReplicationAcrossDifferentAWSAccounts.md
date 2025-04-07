@@ -21,7 +21,7 @@ S3 Bucket – Permissions – Bucket Policy – edit - Use this policy: https://
 - Replace resource with Account B bucket ARN – account-b-us-west-1  
 
 **Bucket Policy:**  
-
+'''
 { 
 
    "Version":"2012-10-17", 
@@ -69,7 +69,7 @@ S3 Bucket – Permissions – Bucket Policy – edit - Use this policy: https://
    ] 
 
 } 
-
+'''
  
 
  
