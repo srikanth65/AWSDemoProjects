@@ -79,6 +79,6 @@ S3 Bucket – Permissions – Bucket Policy – edit - Use this policy: https://
 
 } ```
 
- </details>
+</details>
 
  
