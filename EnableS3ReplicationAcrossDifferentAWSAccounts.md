@@ -13,7 +13,9 @@
 
 </details>
 
-<summary>Account B</summary>  
+<details>
+   
+<summary>Account B </summary>  
 
 - S3 Bucket name: Create a bucket with name account-b-us-west-1 and Enable bucket versioning 
 
@@ -21,8 +23,10 @@ S3 Bucket – Permissions – Bucket Policy – edit - Use this policy: https://
 
 - Replace with IAM role ARN number from Account A  
 
-- Replace resource with Account B bucket ARN – account-b-us-west-1  
+- Replace resource with Account B bucket ARN – account-b-us-west-1
 
+
+</details>
 **Bucket Policy:**  
 ```
 { 
