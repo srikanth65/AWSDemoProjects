@@ -13,7 +13,7 @@
 
 </details>
 
-**Account B:**  
+<summary>Account B</summary>  
 
 - S3 Bucket name: Create a bucket with name account-b-us-west-1 and Enable bucket versioning 
 
