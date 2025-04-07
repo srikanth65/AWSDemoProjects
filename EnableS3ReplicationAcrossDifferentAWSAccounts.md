@@ -27,7 +27,9 @@ S3 Bucket – Permissions – Bucket Policy – edit - Use this policy: https://
 
 
 </details>
-**Bucket Policy:**  
+
+<details>
+<summary>Bucket Policy </summary>
 ```
 { 
 
@@ -77,6 +79,6 @@ S3 Bucket – Permissions – Bucket Policy – edit - Use this policy: https://
 
 } 
 ```
- 
+ </details>
 
  
