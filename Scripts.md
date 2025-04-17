@@ -16,7 +16,7 @@ tar -zxvf nexus-data-backup.tar.gz -C /opt/sonatype-work/nexus3
 sudo systemctl start nexus
 
 
-**Backup Script Example**
+# Backup Script Example
 
 #!/bin/bash 
 
