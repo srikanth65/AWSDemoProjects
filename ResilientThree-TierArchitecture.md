@@ -469,7 +469,7 @@ sudo apt install mysql-server -y
 
 And type the below command to initialize the database.
 
-mysql -h book.rds.com -u <user_name_of_rds> -p<password_of_rds> test < test.db
+mysql -h book.rds.com(endpoint) -u <user_name_of_rds> -p<password_of_rds> test < test.db
 
 **Route 53**
 
