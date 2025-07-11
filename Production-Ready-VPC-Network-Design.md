@@ -1,3 +1,5 @@
+Visual Subnet Calculator: https://www.davidc.net/sites/default/subnets/subnets.html 
+
 Production-ready VPC network design that supports Dev, Stage, Prod, and shared services (monitoring/logging) environments — with a solid tagging strategy to support governance, cost tracking, security, and automation.
 
 **VPC Network Design for Dev, Stage, Prod, and Shared Services**
@@ -19,6 +21,7 @@ Tagging strategy: To support security, billing, automation, and management
 - VPC Peering or Transit Gateway used for centralized access/logging
 
 **Option B: One VPC, environment isolation via subnets and naming**
+
 - Easier to manage for smaller orgs
 - Use subnet CIDR ranges to separate environments
 
@@ -30,6 +33,7 @@ Tagging strategy: To support security, billing, automation, and management
 - Monitoring/Logging (Private)
 
 This layout ensures:
+
 - Environment isolation
 - High availability across multiple AZs
 - Sufficient room for growth (scalable)
@@ -43,13 +47,16 @@ This layout ensures:
     Prod	            10.30.0.0/16
 
 We divide each /16 into smaller subnets for:
+
 - AZ redundancy (2 or 3 AZs)
 - Logical tiers (web, app, db, monitoring)
 
 **Subnet CIDR Breakdown (per environment)**
+
 Each /16 block is broken into /20 subnets (~4,096 IPs each), then /24 subnets (~256 IPs each) per AZ.
 
 **Example: Dev (VPC: 10.10.0.0/16)**
+
 - Tier	            Subnet CIDR Block	        AZ-a	            AZ-b	              AZ-c
 - Web (Public)	    10.10.0.0/20	            10.10.0.0/24	    10.10.1.0/24	      10.10.2.0/24
 - App (Private)	    10.10.16.0/20	            10.10.16.0/24	    10.10.17.0/24	      10.10.18.0/24
@@ -59,13 +66,15 @@ Each /16 block is broken into /20 subnets (~4,096 IPs each), then /24 subnets (~
 **Same structure for Stage & Prod:**
 
 **Stage VPC: 10.20.0.0/16**
+
   - Web: 10.20.0.0/20
   - App: 10.20.16.0/20
-- DB: 10.20.32.0/20
+  - DB: 10.20.32.0/20
 
 **Monitoring: 10.20.48.0/20**
 
 **Prod VPC: 10.30.0.0/16**
+
 - Web: 10.30.0.0/20
 - App: 10.30.16.0/20
 - DB: 10.30.32.0/20
@@ -93,6 +102,7 @@ Same structure for Stage (10.20.x.x) and Prod (10.30.x.x)
 
 
 **When to Use a Separate Monitoring VPC**
+
 - Criteria	                                                      Recommendation	                  Reason
 - Medium to large scale org	                                      Separate Monitoring VPC	          Easier central management
 - Security/compliance (e.g. PCI, HIPAA)	                          Separate Monitoring VPC	           Isolation reduces attack surface
@@ -101,6 +111,7 @@ Same structure for Stage (10.20.x.x) and Prod (10.30.x.x)
 - Cost-sensitive or simple setup	                                 Inline monitoring/logging in same VPC	Simpler to maintain
 
 **Separate Monitoring VPC — Yes or No?**
+
 - **Use Case	                    Best Practice**
 - Small/medium org	              Embed monitoring into each VPC via subnets (dev, stage, prod)
 - Large org/regulated	            Use a separate VPC for monitoring/logging, with VPC peering or TGW
@@ -110,12 +121,14 @@ Same structure for Stage (10.20.x.x) and Prod (10.30.x.x)
 
 
 **Benefits of Separate Monitoring VPC**
+
 - Logical separation and reduced blast radius
 - Easier centralization of alerts, dashboards, and log archives
 - Simpler access control and routing via VPC peering or Transit Gateway
 - Supports least-privilege IAM and strict security policies
 
 **Shared Monitoring VPC (10.10.0.0/16)**
+
 If used, it might include:
 
 - **Subnet Type	          CIDR Block	          Purpose**
@@ -126,6 +139,7 @@ If used, it might include:
 - Security tools	        10.10.41.0/24	      	GuardDuty, Nessus, etc.
 
 **Access & Routing Between VPCs**
+
 - Use VPC Peering for simple setups (1:1 communication)
 - Use Transit Gateway if managing 3+ VPCs with centralized access
 - Allow only private subnets from app tiers to connect to logging VPC
@@ -190,6 +204,7 @@ A consistent tagging strategy helps with cost allocation, security audits, autom
 - X-Ray/Jaeger	              Tracing for microservices
 
 **Recommendations**
+
 - Feature	                    Recommended Practice
 - CIDR Planning	              Assign /16 per VPC, split into /24 per subnet
 - Monitoring Placement	      Centralized VPC if scaling, else per-env
