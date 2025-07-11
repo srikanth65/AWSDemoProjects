@@ -216,4 +216,34 @@ A consistent tagging strategy helps with cost allocation, security audits, autom
 - auditability                Deploy Bastion Hosts via SSM Session Manager
 - templatize VPCs             Service Catalog
 
+**Optional: /23 or /22 Size Subnets**
 
+If you want larger subnets for a busier dev environment:
+
+**-   Subnet Size	        IPs per Subnet	        # of Subnets per /16	        Use Case Example**
+-     /24	                256	                    256	                          Small services, HA setup
+-     /23	                512	                    128	                          Medium-sized app clusters
+-     /22	                1024	                  64	                          EKS or large-scale testing
+
+
+**When working with AWS VPC subnets, not all IPs in a subnet are usable because AWS reserves 5 IP addresses per subnet:**
+
+**AWS reserves:**
+- First IP: Network address
+- Second IP: VPC router
+- Third IP: Reserved for AWS DNS
+- Fourth IP: Reserved for future use
+- Last IP: Broadcast address (even though AWS VPCs don't use broadcast)
+
+**Usable IPs per Subnet Size**
+
+ **CIDR Block	        Total IPs	        Usable IPs	          Typical Use Case**
+  /28	                16	                11	              Tiny apps, NAT Gateway, testing
+  /27	                32	                27	              Small services, Dev
+  /26	                64	                59	              Low-traffic tiers
+  /25	                128		              123              	Moderate apps or services
+  /24	                256	                251	              General tier, standard subnet
+  /23	                512	                507	              Busy app layer or EKS nodes
+  /22	                1,024	              1,019	            Large-scale apps, EKS, batch
+
+**Best practice in AWS: Avoid subnets smaller than /28 or larger than /16 in a single VPC.**
