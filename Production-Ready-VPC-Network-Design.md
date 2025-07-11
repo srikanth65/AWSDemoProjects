@@ -215,6 +215,10 @@ A consistent tagging strategy helps with cost allocation, security audits, autom
 - security posture            Enable GuardDuty, Config, Security Hub
 - auditability                Deploy Bastion Hosts via SSM Session Manager
 - templatize VPCs             Service Catalog
+- Enable flow logs on VPC and store in CloudWatch or S3
+- Reserve /23 or /22 for future scaling
+- Add VPC endpoints (S3, DynamoDB) in app/db tiers to avoid NAT costs
+- Implement subnet group naming for RDS, EKS, and ALB
 
 **Optional: /23 or /22 Size Subnets**
 
@@ -237,13 +241,55 @@ If you want larger subnets for a busier dev environment:
 
 **Usable IPs per Subnet Size**
 
- **CIDR Block	        Total IPs	        Usable IPs	          Typical Use Case**
-  /28	                16	                11	              Tiny apps, NAT Gateway, testing
-  /27	                32	                27	              Small services, Dev
-  /26	                64	                59	              Low-traffic tiers
-  /25	                128		              123              	Moderate apps or services
-  /24	                256	                251	              General tier, standard subnet
-  /23	                512	                507	              Busy app layer or EKS nodes
-  /22	                1,024	              1,019	            Large-scale apps, EKS, batch
+-  **CIDR Block	        Total IPs	        Usable IPs	          Typical Use Case**
+-   /28	                16	                11	              Tiny apps, NAT Gateway, testing
+-   /27	                32	                27	              Small services, Dev
+-   /26	                64	                59	              Low-traffic tiers
+-   /25	                128		              123              	Moderate apps or services
+-   /24	                256	                251	              General tier, standard subnet
+-   /23	                512	                507	              Busy app layer or EKS nodes
+-   /22	                1,024	              1,019	            Large-scale apps, EKS, batch
 
 **Best practice in AWS: Avoid subnets smaller than /28 or larger than /16 in a single VPC.**
+
+
+**Suggested Tags for VPC and Subnets**
+
+Use these tags to manage resources effectively in cost, automation, and security tools:
+
+**Tags for the VPC (10.0.0.0/16)**
+
+**- Key	          Value	              Description**
+-   Name	        dev-vpc	            Identifies the VPC
+- Environment	    dev	                Used for filtering/automation
+- Project	        my-app	            Associates VPC with a specific app
+- Owner	          sri@example.com	    Helps with auditing/accountability
+- Terraform	      true	              Indicates IaC-managed
+- CostCenter	    CC-DEV-001	        For chargeback/showback
+
+**Tags for Each Subnet**
+
+-   **Key	          Value**
+-   Name	          dev-public-web-az1, etc.
+-   Environment	    dev
+-   Tier	          web/app/db/monitoring
+-   AZ	            us-west-2a/us-west-2b
+-   Visibility	    public/private/isolated
+-   Terraform	      true
+
+**Routing Strategy**
+
+**Public Subnets (Web)**
+  - Attached to IGW
+  - Route 0.0.0.0/0 → Internet Gateway
+
+**Private Subnets (App)**
+  - Route 0.0.0.0/0 → NAT Gateway in public subnet
+
+**DB Subnets (Isolated)**
+- No route to internet (no IGW or NAT)
+- Only accessible within VPC
+
+
+
+
