@@ -1,6 +1,7 @@
-Visual Subnet Calculator: https://www.davidc.net/sites/default/subnets/subnets.html 
 
-Production-ready VPC network design that supports Dev, Stage, Prod, and shared services (monitoring/logging) environments — with a solid tagging strategy to support governance, cost tracking, security, and automation.
+**Production-ready VPC network design that supports Dev, Stage, Prod, and shared services (monitoring/logging) environments — with a solid tagging strategy to support governance, cost tracking, security, and automation.**
+
+Visual Subnet Calculator: https://www.davidc.net/sites/default/subnets/subnets.html
 
 **VPC Network Design for Dev, Stage, Prod, and Shared Services**
 
