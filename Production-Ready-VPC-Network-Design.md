@@ -52,17 +52,18 @@ We divide each /16 into smaller subnets for:
 - AZ redundancy (2 or 3 AZs)
 - Logical tiers (web, app, db, monitoring)
 
-**Subnet CIDR Breakdown (per environment)**
+<img width="1416" height="514" alt="Screenshot 2025-07-11 at 4 12 07 PM" src="https://github.com/user-attachments/assets/40d5d5a7-cb6c-4991-bcc3-4f834014ee66" />
 
-Each /16 block is broken into /20 subnets (~4,096 IPs each), then /24 subnets (~256 IPs each) per AZ.
+Should Monitoring Subnets Be Public or Private?
 
-**Example: Dev (VPC: 10.10.0.0/16)**
+**Best Practice: Use Private Subnets**
 
-- Tier	            Subnet CIDR Block	        AZ-a	            AZ-b	              AZ-c
-- Web (Public)	    10.10.0.0/20	            10.10.0.0/24	    10.10.1.0/24	      10.10.2.0/24
-- App (Private)	    10.10.16.0/20	            10.10.16.0/24	    10.10.17.0/24	      10.10.18.0/24
-- DB (Private)	    10.10.32.0/20	            10.10.32.0/24	    10.10.33.0/24	      10.10.34.0/24
-- Monitoring	      10.10.48.0/20	            10.10.48.0/24	    10.10.49.0/24	      10.10.50.0/24
+* Monitoring tools like Prometheus, Grafana, Fluent Bit, CloudWatch Agent, Loki, etc., typically:
+    * Pull data from private resources (EC2, EKS, RDS)
+    * Push data to AWS-managed services (e.g., CloudWatch, S3)
+* Expose dashboards via internal ALBs (or use Bastion/SSM for access)
+* Avoid exposing monitoring stack to the public internet
+⚠️ Never run monitoring tools in public subnets unless you explicitly need public access (e.g., external third-party integrations, external dashboards via reverse proxy + WAF)
 
 **Same structure for Stage & Prod:**
 
