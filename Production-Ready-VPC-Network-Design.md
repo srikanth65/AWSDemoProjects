@@ -292,6 +292,75 @@ Use these tags to manage resources effectively in cost, automation, and security
 - No route to internet (no IGW or NAT)
 - Only accessible within VPC
 
+**Tagging Strategy for VPC & Subnets**
 
+ VPC Tags
 
+"Name"         = "vpc-dev"
+"Environment"  = "dev"
+"Owner"        = "Sri"
+"CostCenter"   = "DevOps-001"
+"Project"      = "DevPlatform"
+"Terraform"    = "true"
 
+**Subnet Tags (example for dev-app-az-a)**
+
+"Name"         = "dev-app-az-a"
+"Environment"  = "dev"
+"Tier"         = "app"
+"AZ"           = "az-a"
+"Project"      = "DevPlatform"
+"Terraform"    = "true"
+
+**Internet Gateway Tag Example**
+
+"Name"         = "igw-dev"
+"Environment"  = "dev"
+"Project"      = "DevPlatform"
+"Owner"        = "Sri"
+"Terraform"    = "true"
+"Purpose"      = "Internet access for public subnets"
+
+Best practice: Attach the IGW only to public subnets; tag it clearly to distinguish from NAT.
+
+**NAT Gateway Tag Example**
+
+"Name"         = "nat-gw-dev-az-a"
+"Environment"  = "dev"
+"Project"      = "DevPlatform"
+"Owner"        = "Sri"
+"Terraform"    = "true"
+"AZ"           = "az-a"
+"Purpose"      = "Outbound internet for private subnets"
+
+Tip: If you're using multi-AZ NAT Gateways (recommended for prod), tag each with the AZ and purpose.
+
+**Route Table Tag Examples**
+
+**Public Route Table (for Web Tier)**
+
+"Name"         = "rtb-public-dev"
+"Environment"  = "dev"
+"Tier"         = "web"
+"Purpose"      = "Routes to IGW for public access"
+"Terraform"    = "true"
+"Owner"        = "Sri"
+
+**Private Route Table (for App and Monitoring Tier)**
+
+"Name"         = "rtb-private-dev-az-a"
+"Environment"  = "dev"
+"Tier"         = "app"
+"AZ"           = "az-a"
+"Purpose"      = "Route private traffic via NAT Gateway"
+"Terraform"    = "true"
+"Owner"        = "Sri"
+
+**Isolated Route Table (for DB Tier)**
+
+"Name"         = "rtb-db-isolated-dev"
+"Environment"  = "dev"
+"Tier"         = "db"
+"Purpose"      = "No external access; internal VPC routing only"
+"Terraform"    = "true"
+"Owner"        = "Sri"
