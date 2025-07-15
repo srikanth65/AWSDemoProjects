@@ -1,0 +1,15 @@
+
+find . -name "*.log" -mtime -1
+
+grep -ie error application.log
+grep -ie critical system.log
+
+grep -iec error application.log
+grep -iec fatal application.log
+
+
+grep -iec critical system.log
+grep -iec fatal system.log
+
+
+
