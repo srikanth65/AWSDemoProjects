@@ -11,7 +11,7 @@ timedatectl set-timezone America/Vancouver      # this sets the time zone
 
 
 
-We change the time also but it's not recommended as system clock synchronized,
+**We change the time also but it's not recommended as system clock synchronized,**
 
 timedatectl set-ntp off
 
